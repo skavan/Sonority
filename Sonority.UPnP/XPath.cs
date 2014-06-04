@@ -66,5 +66,9 @@ namespace Sonority.XPath
         public static readonly XPathExpression Creator = XPathExpression.Compile("/didl:DIDL-Lite/didl:item/dc:creator", XPath.Globals.Manager);
         public static readonly XPathExpression Title = XPathExpression.Compile("/didl:DIDL-Lite/didl:item/dc:title", XPath.Globals.Manager);
         public static readonly XPathExpression Album = XPathExpression.Compile("/didl:DIDL-Lite/didl:item/upnp:album", XPath.Globals.Manager);
+        public static readonly XPathExpression TrackNum = XPathExpression.Compile("/didl:DIDL-Lite/didl:item/upnp:originalTrackNumber", XPath.Globals.Manager);
+        public static readonly XPathExpression AlbumArtist = XPathExpression.Compile("/didl:DIDL-Lite/didl:item/r:albumArtist", XPath.Globals.Manager);
+        public static readonly XPathExpression Artist = XPathExpression.Compile("/didl:DIDL-Lite/didl:item/dc:creator", XPath.Globals.Manager);
+
     }
 }

@@ -125,7 +125,7 @@ namespace Sonority.Test
             {
                 Thread.Sleep(30000);
 
-                foreach (ZoneGroup zp in disc.Topology)
+                foreach (ZoneGroup zp in _disc.Topology)
                 {
                     Console.WriteLine("{0} -> {1}", zp.Coordinator.UniqueDeviceName, zp.Coordinator.DeviceProperties.ZoneName);
                 }

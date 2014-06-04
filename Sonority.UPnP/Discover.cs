@@ -25,6 +25,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Threading;
@@ -76,8 +77,15 @@ namespace Sonority.UPnP
 
                 if (_topologyHandled == false)
                 {
-                    zp.ZoneGroupTopology.PropertyChanged += new PropertyChangedEventHandler(ZoneGroupTopology_PropertyChanged);
-                    _topologyHandled = true;
+                    try
+                    {
+                        zp.ZoneGroupTopology.PropertyChanged += new PropertyChangedEventHandler(ZoneGroupTopology_PropertyChanged);
+                        _topologyHandled = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("discover.cs :" + ex.Message);
+                    }
                 }
 
                 _zonePlayers.Add(zp);
@@ -87,7 +95,7 @@ namespace Sonority.UPnP
 
             if (zpAdded)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs("ZonePlayers"));
+                PropertyChanged(this, new PropertyChangedEventArgs("ZonePlayer Added"));
             }
 
             return zonePlayer;
@@ -175,13 +183,14 @@ namespace Sonority.UPnP
 
             dispOperation.Completed += delegate
             {
-                PropertyChanged(this, new PropertyChangedEventArgs("ZonePlayers"));
+                PropertyChanged(this, new PropertyChangedEventArgs("ZonePlayer Removed"));
             };
         }
 
         void IUPnPDeviceFinderCallback.SearchComplete(int lFindData)
         {
             // do something?
+            PropertyChanged(this, new PropertyChangedEventArgs("SearchComplete"));
         }
 
         public ObservableCollection<ZonePlayer> ZonePlayers
