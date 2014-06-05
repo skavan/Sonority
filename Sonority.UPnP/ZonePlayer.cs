@@ -65,10 +65,14 @@ namespace Sonority.UPnP
         {
             for (int i = 0; i < 3; ++i)
             {
-                UPnPDevice device = _finder.FindByUDN(uniqueDeviceName);
-                if (device != null)
+                
+                if (uniqueDeviceName != null)
                 {
-                    return device;
+                    UPnPDevice device = _finder.FindByUDN(uniqueDeviceName);
+                    if (device != null)
+                    {
+                        return device;
+                    }
                 }
             }
 
